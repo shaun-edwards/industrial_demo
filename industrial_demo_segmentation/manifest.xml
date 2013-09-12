@@ -1,0 +1,15 @@
+<package>
+  <description brief="industrial_demo_segmentation">
+
+     industrial_segmentation_demo
+
+  </description>
+  <author>Shaun M. Edwards</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/industrial_demo_segmentation</url>
+  <depend package="tabletop_object_detector"/>
+
+</package>
+
+

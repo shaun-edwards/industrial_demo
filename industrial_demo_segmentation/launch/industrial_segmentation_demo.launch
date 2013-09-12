@@ -1,0 +1,51 @@
+<!--
+This launch file is based on the tabletop_object_detector/tabletop_segmentation file.
+
+It has been altered to include openni.launch and parameter defaults that assume the
+kinect/asus sensor frame is used
+
+-->
+
+<launch>
+
+    <arg name="clustering_voxel_size" default="0.003" />
+    <arg name="flatten_table" default="false"/>
+    <arg name="table_padding" default="0.01"/>
+    
+    <!-- Kinect/Asus sensor -->
+    <include file="$(find openni_launch)/launch/openni.launch"/>
+    <param name="/camera/driver/data_skip" value="10"/>
+    
+    <!-- Visualization -->
+    <node pkg="rviz" name="rviz" type="rviz"/>
+
+    <node pkg="tabletop_object_detector" name="tabletop_segmentation" type="tabletop_segmentation" respawn="true" output="screen">
+	  <!--topic remapping-->
+        <remap from="cloud_in" to="camera/depth_registered/points" />
+        <remap from="segmentation_srv" to="tabletop_segmentation" />
+        <remap from="markers_out" to="tabletop_segmentation_markers" />
+
+	      <param name="clustering_voxel_size" value="$(arg clustering_voxel_size)" />
+	      <param name="inlier_threshold" value="300" />
+	      <param name="plane_detection_voxel_size" value="0.01" />
+	      <param name="cluster_distance" value="0.03" />
+	      <param name="min_cluster_size" value="50" />
+	      <param name="flatten_table" value="$(arg flatten_table)" />
+	      <param name="table_padding" value="$(arg table_padding)" />
+
+	      <!-- all clouds will be processed in the incoming frame, which is -->
+	      <!-- assumed to the the camera's optical frame -->
+	      <!--param name="processing_frame" value="/camera_depth_frame" /-->
+	      <param name="up_direction" value="-1.0" />
+	      <param name="z_filter_min" value="0.25" />
+	      <param name="z_filter_max" value="1.5" />
+	      <param name="y_filter_min" value="-1.2" />
+	      <param name="y_filter_max" value="1.2" />
+	      <param name="x_filter_min" value="-1.2" />
+	      <param name="x_filter_max" value="1.2" />
+	      <param name="table_z_filter_min" value="0.01" />
+	      <param name="table_z_filter_max" value="0.05" />			
+
+    </node>
+
+</launch>

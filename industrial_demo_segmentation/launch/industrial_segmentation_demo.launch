@@ -24,7 +24,10 @@ kinect/asus sensor frame is used
         <remap from="cloud_in" to="camera/depth_registered/points" />
         <remap from="segmentation_srv" to="tabletop_segmentation" />
         <remap from="markers_out" to="tabletop_segmentation_markers" />
-
+        
+        <!-- Parameter definitions can be found here:
+        http://wiki.ros.org/tabletop_object_detector -->
+        
 	      <param name="clustering_voxel_size" value="$(arg clustering_voxel_size)" />
 	      <param name="inlier_threshold" value="300" />
 	      <param name="plane_detection_voxel_size" value="0.01" />
@@ -43,8 +46,8 @@ kinect/asus sensor frame is used
 	      <param name="y_filter_max" value="1.2" />
 	      <param name="x_filter_min" value="-1.2" />
 	      <param name="x_filter_max" value="1.2" />
-	      <param name="table_z_filter_min" value="0.01" />
-	      <param name="table_z_filter_max" value="0.05" />			
+	      <param name="table_z_filter_min" value="0.03" />
+	      <param name="table_z_filter_max" value="0.25" />			
 
     </node>
 

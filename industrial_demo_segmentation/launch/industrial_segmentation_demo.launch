@@ -17,7 +17,7 @@ kinect/asus sensor frame is used
     <param name="/camera/driver/data_skip" value="10"/>
     
     <!-- Visualization -->
-    <node pkg="rviz" name="rviz" type="rviz"/>
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find industrial_demo_segmentation)/config/tabletop.rviz" required="true"/>
 
     <node pkg="tabletop_object_detector" name="tabletop_segmentation" type="tabletop_segmentation" respawn="true" output="screen">
 	  <!--topic remapping-->
